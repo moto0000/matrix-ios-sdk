@@ -30,8 +30,7 @@ Pod::Spec.new do |s|
       ss.ios.deployment_target = "9.0"
       ss.osx.deployment_target = "10.10"
       
-      ss.source_files = "MatrixSDK", "MatrixSDK/**/*.{h,m}", "MatrixSDK/**/*.{swift}"
-      
+      ss.vendored_frameworks = "MatrixSDK.xcframework"
 
       ss.dependency 'AFNetworking', '~> 4.0.0'
       ss.dependency 'GZIP', '~> 1.3.0'

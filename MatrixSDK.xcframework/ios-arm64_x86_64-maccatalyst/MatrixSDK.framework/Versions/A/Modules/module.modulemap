@@ -1,0 +1,11 @@
+framework module MatrixSDK {
+  umbrella header "MatrixSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module MatrixSDK.Swift {
+    header "MatrixSDK-Swift.h"
+    requires objc
+}

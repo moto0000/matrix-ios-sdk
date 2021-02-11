@@ -1,0 +1,822 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MatrixSDK
+import Foundation
+@_exported import MatrixSDK
+import Swift
+import UIKit
+@objc @_inheritsConvenienceInitializers @objcMembers public class MXUIKitApplicationStateService : ObjectiveC.NSObject {
+  @objc public var applicationState: UIKit.UIApplication.State {
+    get
+  }
+  @objc public var backgroundTimeRemaining: Foundation.TimeInterval {
+    @objc get
+  }
+  @objc public static func readableApplicationState(applicationState: UIKit.UIApplication.State) -> Foundation.NSString
+  @objc public static func readableEstimatedBackgroundTimeRemaining(backgroundTimeRemaining: Foundation.TimeInterval) -> Foundation.NSString
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension MXIdentityService {
+  @nonobjc convenience public init(identityServer: Foundation.URL, accessToken: Swift.String?, homeserverRestClient: MatrixSDK.MXRestClient)
+  @discardableResult
+  @nonobjc public func accessToken(completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation?
+  @discardableResult
+  @nonobjc public func lookup3PIDs(_ descriptors: [MatrixSDK.MX3PID], completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MX3PID : Swift.String]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func requestEmailValidation(_ email: Swift.String, clientSecret: Swift.String, sendAttempt: Swift.UInt, nextLink: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func requestPhoneNumberValidation(_ phoneNumber: Swift.String, countryCode: Swift.String, clientSecret: Swift.String, sendAttempt: Swift.UInt, nextLink: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<(Swift.String, Swift.String)>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func submit3PIDValidationToken(_ token: Swift.String, medium: Swift.String, clientSecret: Swift.String, sid: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func signUrl(_ signUrl: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func account(completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func pingIdentityServer(completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+}
+@objc @objcMembers public class MXBackgroundPushRulesManager : ObjectiveC.NSObject {
+  @objc public init(withCredentials credentials: MatrixSDK.MXCredentials)
+  @objc public func handleAccountData(_ accountData: [Swift.AnyHashable : Any])
+  @objc public func isRoomMentionsOnly(_ roomId: Swift.String) -> Swift.Bool
+  @objc public func pushRule(matching event: MatrixSDK.MXEvent, roomState: MatrixSDK.MXRoomState, currentUserDisplayName: Swift.String?) -> MatrixSDK.MXPushRule?
+  @objc deinit
+  @objc override dynamic public init()
+}
+public enum MXRoomHistoryVisibility : Swift.Equatable, Swift.Hashable {
+  case worldReadable, shared, invited, joined
+  public var identifier: Swift.String {
+    get
+  }
+  public init?(identifier: Swift.String?)
+  public static func == (a: MatrixSDK.MXRoomHistoryVisibility, b: MatrixSDK.MXRoomHistoryVisibility) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXRoomJoinRule : Swift.Equatable, Swift.Hashable {
+  case `public`
+  case invite
+  case `private`, knock
+  public var identifier: Swift.String {
+    get
+  }
+  public init?(identifier: Swift.String?)
+  public static func == (a: MatrixSDK.MXRoomJoinRule, b: MatrixSDK.MXRoomJoinRule) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXRoomGuestAccess : Swift.Equatable, Swift.Hashable {
+  case canJoin
+  case forbidden
+  public var identifier: Swift.String {
+    get
+  }
+  public init?(identifier: Swift.String?)
+  public static func == (a: MatrixSDK.MXRoomGuestAccess, b: MatrixSDK.MXRoomGuestAccess) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXRoomDirectoryVisibility : Swift.Equatable, Swift.Hashable {
+  case `private`
+  case `public`
+  public var identifier: Swift.String {
+    get
+  }
+  public init?(identifier: Swift.String?)
+  public static func == (a: MatrixSDK.MXRoomDirectoryVisibility, b: MatrixSDK.MXRoomDirectoryVisibility) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXRoomPreset : Swift.Equatable, Swift.Hashable {
+  case privateChat
+  case trustedPrivateChat
+  case publicChat
+  public var identifier: Swift.String {
+    get
+  }
+  public init?(identifier: Swift.String?)
+  public static func == (a: MatrixSDK.MXRoomPreset, b: MatrixSDK.MXRoomPreset) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXTimelineDirection : Swift.Equatable, Swift.Hashable {
+  case forwards
+  case backwards
+  public var identifier: MatrixSDK.__MXTimelineDirection {
+    get
+  }
+  public init(identifer _identifier: MatrixSDK.__MXTimelineDirection)
+  public static func == (a: MatrixSDK.MXTimelineDirection, b: MatrixSDK.MXTimelineDirection) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension MXRoomMember {
+  public var membership: MatrixSDK.MXMembership {
+    get
+  }
+  public var prevMembership: MatrixSDK.MXMembership {
+    get
+  }
+}
+extension MX3PidAddManager {
+  @nonobjc convenience public init(session: MatrixSDK.MXSession)
+  @nonobjc public func cancel(session: MatrixSDK.MX3PidAddSession)
+  @discardableResult
+  @nonobjc public func startAddEmailSession(_ email: Swift.String, nextLink: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MX3PidAddSession
+  @nonobjc public func tryFinaliseAddEmailSession(_ session: MatrixSDK.MX3PidAddSession, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func tryFinaliseAddEmailSession(_ session: MatrixSDK.MX3PidAddSession, password: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func tryFinaliseAddEmailSession(_ session: MatrixSDK.MX3PidAddSession, authParams: [Swift.String : Any]?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func startAddPhoneNumberSession(_ phoneNumber: Swift.String, countryCode: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MX3PidAddSession
+  @nonobjc public func finaliseAddPhoneNumberSession(_ session: MatrixSDK.MX3PidAddSession, token: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func finaliseAddPhoneNumberSession(_ session: MatrixSDK.MX3PidAddSession, token: Swift.String, password: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func finaliseAddPhoneNumberSession(_ session: MatrixSDK.MX3PidAddSession, token: Swift.String, authParams: [Swift.String : Any]?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func startIdentityServerSession(withEmail email: Swift.String, bind: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Bool>) -> Swift.Void) -> MatrixSDK.MX3PidAddSession
+  @nonobjc public func tryFinaliseIdentityServerEmailSession(_ session: MatrixSDK.MX3PidAddSession, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func startIdentityServerSession(withPhoneNumber phoneNumber: Swift.String, countryCode: Swift.String?, bind: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Bool>) -> Swift.Void) -> MatrixSDK.MX3PidAddSession
+  @nonobjc public func finaliseIdentityServerPhoneNumberSession(_ session: MatrixSDK.MX3PidAddSession, token: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+}
+extension MXRoomState {
+  public var historyVisibility: MatrixSDK.MXRoomHistoryVisibility! {
+    get
+  }
+  public var joinRule: MatrixSDK.MXRoomJoinRule! {
+    get
+  }
+  public var guestAccess: MatrixSDK.MXRoomGuestAccess! {
+    get
+  }
+  public var membership: MatrixSDK.MXMembership {
+    get
+  }
+  public func stateEvents(with type: MatrixSDK.MXEventType) -> [MatrixSDK.MXEvent]?
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class MXMemory : ObjectiveC.NSObject {
+  @objc public static func formattedMemoryFootprint() -> Swift.String
+  @objc public static func memoryAvailable() -> Swift.UInt
+  @objc public static func formattedMemoryAvailable() -> Swift.String
+  @objc public static func allocateMemoryOfSize(numberOfBytes: Swift.Int)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension MXRoom {
+  @discardableResult
+  @nonobjc public func members(completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomMembers?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendEvent(_ eventType: MatrixSDK.MXEventType, content: [Swift.String : Any], localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendStateEvent(_ eventType: MatrixSDK.MXEventType, content: [Swift.String : Any], stateKey: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendMessage(withContent content: [Swift.String : Any], localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendTextMessage(_ text: Swift.String, formattedText: Swift.String? = nil, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendEmote(_ emote: Swift.String, formattedText: Swift.String? = nil, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendImage(data imageData: Foundation.Data, size: CoreGraphics.CGSize, mimeType: Swift.String, thumbnail: MatrixSDK.MXImage?, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendVideo(localURL: Foundation.URL, thumbnail: MatrixSDK.MXImage?, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendFile(localURL: Foundation.URL, mimeType: Swift.String, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendAudioFile(localURL: Foundation.URL, mimeType: Swift.String, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setTopic(_ topic: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setAvatar(url: Foundation.URL, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setName(_ name: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setHistoryVisibility(_ historyVisibility: MatrixSDK.MXRoomHistoryVisibility, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setJoinRule(_ joinRule: MatrixSDK.MXRoomJoinRule, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setGuestAccess(_ guestAccess: MatrixSDK.MXRoomGuestAccess, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setDirectoryVisibility(_ directoryVisibility: MatrixSDK.MXRoomDirectoryVisibility, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addAlias(_ roomAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func removeAlias(_ roomAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setCanonicalAlias(_ canonicalAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func getDirectoryVisibility(completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomDirectoryVisibility>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func join(completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func leave(completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func invite(_ invitation: MatrixSDK.MXRoomInvitee, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func kickUser(_ userId: Swift.String, reason: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func banUser(_ userId: Swift.String, reason: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func unbanUser(_ userId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setPowerLevel(ofUser userId: Swift.String, powerLevel: Swift.Int, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendTypingNotification(typing: Swift.Bool, timeout: Foundation.TimeInterval?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func redactEvent(_ eventId: Swift.String, reason: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func reportEvent(_ eventId: Swift.String, score: Swift.Int, reason: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendReply(to eventToReply: MatrixSDK.MXEvent, textMessage: Swift.String, formattedTextMessage: Swift.String?, stringLocalizations: MatrixSDK.MXSendReplyEventStringsLocalizable?, localEcho: inout MatrixSDK.MXEvent?, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addTag(_ tag: Swift.String, withOrder order: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func removeTag(_ tag: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func replaceTag(_ oldTag: Swift.String, with newTag: Swift.String?, withOrder newTagOrder: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @nonobjc public func placeCall(withVideo hasVideo: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXCall>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func enableEncryption(withAlgorithm algorithm: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+}
+extension MXSession {
+  @nonobjc public func start(withSyncFilterId filterId: Swift.String? = nil, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func start(withSyncFilter filter: MatrixSDK.MXFilterJSONModel, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func backgroundSync(withTimeout clientTimeout: Foundation.TimeInterval = 0, ignoreSessionState: Swift.Bool = false, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func logout(completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func deactivateAccount(withAuthParameters authParameters: [Swift.String : Any], eraseAccount: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @nonobjc public func setStore(_ store: MatrixSDK.MXStore, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @nonobjc public func enableCrypto(_ isEnabled: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func createRoom(parameters: MatrixSDK.MXRoomCreationParameters, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoom>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func createRoom(parameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoom>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func joinRoom(_ roomIdOrAlias: Swift.String, viaServers: [Swift.String]? = nil, withSignUrl signUrl: Foundation.URL? = nil, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoom>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func leaveRoom(_ roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @nonobjc public var rooms: [MatrixSDK.MXRoom] {
+    get
+  }
+  @nonobjc public func peek(inRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXPeekingRoom>) -> Swift.Void)
+  @discardableResult
+  @nonobjc public func ignore(users userIds: [Swift.String], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func unIgnore(users userIds: [Swift.String], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @nonobjc public func listenToEvents(_ types: [MatrixSDK.MXEventType]? = nil, _ block: @escaping MatrixSDK.MXOnSessionEvent) -> Any
+}
+public struct MX3PID {
+  public enum Medium : Swift.Equatable, Swift.Hashable {
+    case email
+    case msisdn
+    case other(Swift.String)
+    public var identifier: Swift.String {
+      get
+    }
+    public init(identifier: Swift.String)
+    public static func == (a: MatrixSDK.MX3PID.Medium, b: MatrixSDK.MX3PID.Medium) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public var medium: MatrixSDK.MX3PID.Medium
+  public var address: Swift.String
+  public init(medium: MatrixSDK.MX3PID.Medium, address: Swift.String)
+}
+extension MX3PID : Swift.Hashable {
+  public static func == (lhs: MatrixSDK.MX3PID, rhs: MatrixSDK.MX3PID) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum MXEventType : Swift.Equatable, Swift.Hashable {
+  case roomName
+  case roomTopic
+  case roomAvatar
+  case roomMember
+  case roomCreate
+  case roomJoinRules
+  case roomPowerLevels
+  case roomAliases
+  case roomCanonicalAlias
+  case roomEncrypted
+  case roomEncryption
+  case roomGuestAccess
+  case roomHistoryVisibility
+  case roomKey
+  case roomForwardedKey
+  case roomKeyRequest
+  case roomMessage
+  case roomMessageFeedback
+  case roomRedaction
+  case roomThirdPartyInvite
+  case roomTag
+  case presence
+  case typing
+  case callInvite
+  case callCandidates
+  case callAnswer
+  case callSelectAnswer
+  case callHangup
+  case callReject
+  case callNegotiate
+  case callReplaces
+  case callRejectReplacement
+  case reaction
+  case receipt
+  case roomTombStone
+  case keyVerificationStart
+  case keyVerificationAccept
+  case keyVerificationKey
+  case keyVerificationMac
+  case keyVerificationCancel
+  case keyVerificationDone
+  case taggedEvents
+  case custom(Swift.String)
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXEventType, b: MatrixSDK.MXEventType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXMessageType : Swift.Equatable, Swift.Hashable {
+  case text, emote, notice, image, audio, video, location, file
+  case custom(Swift.String)
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXMessageType, b: MatrixSDK.MXMessageType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXMembership : Swift.Equatable, Swift.Hashable {
+  case unknown, invite, join, leave, ban
+  public var identifier: MatrixSDK.__MXMembership {
+    get
+  }
+  public init(identifier: MatrixSDK.__MXMembership)
+  public static func == (a: MatrixSDK.MXMembership, b: MatrixSDK.MXMembership) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class MXSyncResponseFileStore : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension MXSyncResponseFileStore : MatrixSDK.MXSyncResponseStore {
+  @objc dynamic public func open(withCredentials credentials: MatrixSDK.MXCredentials)
+  @objc dynamic public var prevBatch: Swift.String? {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var syncResponse: MatrixSDK.MXSyncResponse? {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public func event(withEventId eventId: Swift.String, inRoom roomId: Swift.String) -> MatrixSDK.MXEvent?
+  @objc dynamic public func roomSummary(forRoomId roomId: Swift.String, using summary: MatrixSDK.MXRoomSummary?) -> MatrixSDK.MXRoomSummary?
+  @objc dynamic public func deleteData()
+}
+extension MXRoomSummary {
+  public var membership: MatrixSDK.MXMembership {
+    get
+  }
+}
+@objc public protocol MXSyncResponseStore : ObjectiveC.NSObjectProtocol {
+  @objc func open(withCredentials credentials: MatrixSDK.MXCredentials)
+  @objc var prevBatch: Swift.String? { get set }
+  @objc var syncResponse: MatrixSDK.MXSyncResponse? { get set }
+  @objc func event(withEventId eventId: Swift.String, inRoom roomId: Swift.String) -> MatrixSDK.MXEvent?
+  @objc func roomSummary(forRoomId roomId: Swift.String, using summary: MatrixSDK.MXRoomSummary?) -> MatrixSDK.MXRoomSummary?
+  @objc func deleteData()
+}
+public typealias MXImage = UIKit.UIImage
+extension MXIdentityServerRestClient {
+  @nonobjc convenience public init(identityServer: Foundation.URL, accessToken: Swift.String?, unrecognizedCertificateHandler handler: MatrixSDK.MXHTTPClientOnUnrecognizedCertificate?)
+  @discardableResult
+  @nonobjc public func lookup3PID(_ descriptor: MatrixSDK.MX3PID, completion: @escaping (MatrixSDK.MXResponse<Swift.String?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func lookup3PIDs(_ descriptors: [MatrixSDK.MX3PID], completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MX3PID : Swift.String]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func requestEmailValidation(_ email: Swift.String, clientSecret: Swift.String, sendAttempt: Swift.UInt, nextLink: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func submit3PIDValidationToken(_ token: Swift.String, medium: Swift.String, clientSecret: Swift.String, sid: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func signUrl(_ signUrl: Swift.String, mxid: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+}
+public enum MXResponse<T> {
+  case success(T)
+  case failure(Swift.Error)
+  public var isSuccess: Swift.Bool {
+    get
+  }
+  public var value: T? {
+    get
+  }
+  public var isFailure: Swift.Bool {
+    get
+  }
+  public var error: Swift.Error? {
+    get
+  }
+}
+public enum MXProgress<T> {
+  case progress(Foundation.Progress)
+  case success(T)
+  case failure(Swift.Error)
+  public var isComplete: Swift.Bool {
+    get
+  }
+  public var progress: Foundation.Progress? {
+    get
+  }
+  public var isSuccess: Swift.Bool {
+    get
+  }
+  public var value: T? {
+    get
+  }
+  public var isFailure: Swift.Bool {
+    get
+  }
+  public var error: Swift.Error? {
+    get
+  }
+}
+public typealias MXOnSessionEvent = (MatrixSDK.MXEvent, MatrixSDK.MXTimelineDirection, Any?) -> Swift.Void
+public enum MXAccountDataType : Swift.Equatable, Swift.Hashable {
+  case direct
+  case pushRules
+  case ignoredUserList
+  case other(Swift.String)
+  public static func == (a: MatrixSDK.MXAccountDataType, b: MatrixSDK.MXAccountDataType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXRoomInvitee : Swift.Equatable, Swift.Hashable {
+  case userId(Swift.String)
+  case email(Swift.String)
+  case thirdPartyId(MatrixSDK.MX3PID)
+  public static func == (a: MatrixSDK.MXRoomInvitee, b: MatrixSDK.MXRoomInvitee) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension MXRestClient {
+  @nonobjc convenience public init(homeServer: Foundation.URL, unrecognizedCertificateHandler handler: MatrixSDK.MXHTTPClientOnUnrecognizedCertificate?)
+  @nonobjc convenience public init(credentials: MatrixSDK.MXCredentials, unrecognizedCertificateHandler handler: MatrixSDK.MXHTTPClientOnUnrecognizedCertificate?)
+  @discardableResult
+  @nonobjc public func isUserNameInUse(_ username: Swift.String, completion: @escaping (Swift.Bool) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func getRegisterSession(completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXAuthenticationSession>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func register(parameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func register(loginType: MatrixSDK.MXLoginFlowType = .password, username: Swift.String?, password: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXCredentials>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @objc dynamic public var registerFallbackURL: Foundation.URL {
+    @objc get
+  }
+  @discardableResult
+  @nonobjc public func getLoginSession(completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXAuthenticationSession>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func login(parameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func login(type loginType: MatrixSDK.MXLoginFlowType = .password, username: Swift.String, password: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXCredentials>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @objc dynamic public var loginFallbackURL: Foundation.URL {
+    @objc get
+  }
+  @discardableResult
+  @nonobjc public func resetPassword(parameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func changePassword(from old: Swift.String, to new: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func logout(completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func deactivateAccount(withAuthParameters authParameters: [Swift.String : Any], eraseAccount: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setAccountData(_ data: [Swift.String : Any], for type: MatrixSDK.MXAccountDataType, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setPusher(pushKey: Swift.String, kind: MatrixSDK.MXPusherKind, appId: Swift.String, appDisplayName: Swift.String, deviceDisplayName: Swift.String, profileTag: Swift.String, lang: Swift.String, data: [Swift.String : Any], append: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func pushRules(completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXPushRulesResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setPushRuleEnabled(ruleId: Swift.String, scope: MatrixSDK.MXPushRuleScope, kind: MatrixSDK.MXPushRuleKind, enabled: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func removePushRule(ruleId: Swift.String, scope: MatrixSDK.MXPushRuleScope, kind: MatrixSDK.MXPushRuleKind, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addPushRule(ruleId: Swift.String, scope: MatrixSDK.MXPushRuleScope, kind: MatrixSDK.MXPushRuleKind, actions: [Any], pattern: Swift.String, conditions: [[Swift.String : Any]], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendEvent(toRoom roomId: Swift.String, eventType: MatrixSDK.MXEventType, content: [Swift.String : Any], txnId: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendStateEvent(toRoom roomId: Swift.String, eventType: MatrixSDK.MXEventType, content: [Swift.String : Any], stateKey: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendMessage(toRoom roomId: Swift.String, messageType: MatrixSDK.MXMessageType, content: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendTextMessage(toRoom roomId: Swift.String, text: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setTopic(ofRoom roomId: Swift.String, topic: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func topic(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setAvatar(ofRoom roomId: Swift.String, avatarUrl: Foundation.URL, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func avatar(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Foundation.URL>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setName(ofRoom roomId: Swift.String, name: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func name(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setHistoryVisibility(ofRoom roomId: Swift.String, historyVisibility: MatrixSDK.MXRoomHistoryVisibility, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func historyVisibility(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomHistoryVisibility>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setJoinRule(ofRoom roomId: Swift.String, joinRule: MatrixSDK.MXRoomJoinRule, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func joinRule(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomJoinRule>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setGuestAccess(forRoom roomId: Swift.String, guestAccess: MatrixSDK.MXRoomGuestAccess, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func guestAccess(forRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomGuestAccess>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setDirectoryVisibility(ofRoom roomId: Swift.String, directoryVisibility: MatrixSDK.MXRoomDirectoryVisibility, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func directoryVisibility(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomDirectoryVisibility>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addAlias(forRoom roomId: Swift.String, alias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func removeRoomAlias(_ roomAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setCanonicalAlias(forRoom roomId: Swift.String, canonicalAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func canonicalAlias(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func joinRoom(_ roomIdOrAlias: Swift.String, viaServers: [Swift.String]? = nil, withThirdPartySigned dictionary: [Swift.String : Any]? = nil, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func leaveRoom(_ roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func invite(_ invitation: MatrixSDK.MXRoomInvitee, toRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func kickUser(_ userId: Swift.String, fromRoom roomId: Swift.String, reason: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func banUser(_ userId: Swift.String, fromRoom roomId: Swift.String, reason: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func unbanUser(_ userId: Swift.String, fromRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func createRoom(parameters: MatrixSDK.MXRoomCreationParameters, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXCreateRoomResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func createRoom(parameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXCreateRoomResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func messages(forRoom roomId: Swift.String, from: Swift.String, direction: MatrixSDK.MXTimelineDirection, limit: Swift.UInt?, filter: MatrixSDK.MXRoomEventFilter, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXPaginationResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func members(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MXEvent]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func state(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendTypingNotification(inRoom roomId: Swift.String, typing: Swift.Bool, timeout: Foundation.TimeInterval?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func redactEvent(_ eventId: Swift.String, inRoom roomId: Swift.String, reason: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func reportEvent(_ eventId: Swift.String, inRoom roomId: Swift.String, score: Swift.Int, reason: Swift.String?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func intialSync(ofRoom roomId: Swift.String, limit: Swift.UInt, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomInitialSync>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func event(withEventId eventId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXEvent>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func event(withEventId eventId: Swift.String, inRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXEvent>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func context(ofEvent eventId: Swift.String, inRoom roomId: Swift.String, limit: Swift.UInt, filter: MatrixSDK.MXRoomEventFilter? = nil, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXEventContext>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func tags(ofRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MXRoomTag]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addTag(_ tag: Swift.String, withOrder order: Swift.String, toRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func removeTag(_ tag: Swift.String, fromRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func updateTaggedEvents(_ roomId: Swift.String, withContent content: MatrixSDK.MXTaggedEvents, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func getTaggedEvents(_ roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXTaggedEvents>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setRoomAccountData(_ roomId: Swift.String, eventType eventTypeString: Swift.String, withParameters content: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func getRoomAccountData(_ roomId: Swift.String, eventType eventTypeString: Swift.String, completion: @escaping (MatrixSDK.MXResponse<[Swift.String : Any]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setDisplayName(_ displayName: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func displayName(forUser userId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setAvatarUrl(_ url: Foundation.URL, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func avatarUrl(forUser userId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Foundation.URL>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func profile(forUser userId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<(Swift.String?, Swift.String?)>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addThirdPartyIdentifier(_ sid: Swift.String, clientSecret: Swift.String, bind: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func addThirdPartyIdentifierOnly(withSessionId sid: Swift.String, clientSecret: Swift.String, authParameters: [Swift.String : Any]?, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func remove3PID(address: Swift.String, medium: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func thirdPartyIdentifiers(_ completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MXThirdPartyIdentifier]?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func bind3Pid(withSessionId sid: Swift.String, clientSecret: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func unbind3Pid(withAddress address: Swift.String, medium: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setPresence(_ presence: MatrixSDK.MXPresence, statusMessage: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func presence(forUser userId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXPresenceResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sync(fromToken token: Swift.String?, serverTimeout: Swift.UInt, clientTimeout: Swift.UInt, setPresence presence: Swift.String?, filterId: Swift.String? = nil, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXSyncResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func publicRooms(onServer server: Swift.String?, limit: Swift.UInt?, since: Swift.String? = nil, filter: Swift.String? = nil, thirdPartyInstanceId: Swift.String? = nil, includeAllNetworks: Swift.Bool = false, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXPublicRoomsResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func roomId(forRoomAlias roomAlias: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.String>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func uploadContent(_ data: Foundation.Data, filename: Swift.String? = nil, mimeType: Swift.String, timeout: Foundation.TimeInterval, uploadProgress: @escaping (MatrixSDK.MXProgress<Foundation.URL>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func turnServer(_ completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXTurnServerResponse?>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendReadReceipt(toRoom roomId: Swift.String, forEvent eventId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func searchMessages(withPattern textPattern: Swift.String, roomEventFilter: MatrixSDK.MXRoomEventFilter? = nil, beforeLimit: Swift.UInt = 0, afterLimit: Swift.UInt = 0, nextBatch: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXSearchRoomEventResults>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func search(withParameters parameters: [Swift.String : Any], nextBatch: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXSearchRoomEventResults>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func uploadKeys(_ deviceKeys: [Swift.String : Any], oneTimeKeys: [Swift.String : Any], forDevice deviceId: Swift.String? = nil, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXKeysUploadResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func downloadKeys(forUsers userIds: [Swift.String], token: Swift.String? = nil, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXKeysQueryResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func claimOneTimeKeys(for usersDevices: MatrixSDK.MXUsersDevicesMap<Foundation.NSString>, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXKeysClaimResponse>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func sendDirectToDevice(eventType: Swift.String, contentMap: MatrixSDK.MXUsersDevicesMap<Foundation.NSDictionary>, txnId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func devices(completion: @escaping (MatrixSDK.MXResponse<[MatrixSDK.MXDevice]>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func device(withId deviceId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXDevice>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func setDeviceName(_ deviceName: Swift.String, forDevice deviceId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func getSession(toDeleteDevice deviceId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXAuthenticationSession>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func deleteDevice(_ deviceId: Swift.String, authParameters: [Swift.String : Any], completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+}
+public enum MXBackgroundSyncServiceError : Swift.Error {
+  case unknown
+  case unknownAlgorithm
+  case decryptionFailure
+  public static func == (a: MatrixSDK.MXBackgroundSyncServiceError, b: MatrixSDK.MXBackgroundSyncServiceError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @objcMembers public class MXBackgroundSyncService : ObjectiveC.NSObject {
+  @objc public init(withCredentials credentials: MatrixSDK.MXCredentials)
+  public func event(withEventId eventId: Swift.String, inRoom roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXEvent>) -> Swift.Void)
+  public func roomState(forRoomId roomId: Swift.String, completion: @escaping (MatrixSDK.MXResponse<MatrixSDK.MXRoomState>) -> Swift.Void)
+  @objc public func isRoomMentionsOnly(_ roomId: Swift.String) -> Swift.Bool
+  @objc public func roomSummary(forRoomId roomId: Swift.String) -> MatrixSDK.MXRoomSummary?
+  @objc public func pushRule(matching event: MatrixSDK.MXEvent, roomState: MatrixSDK.MXRoomState) -> MatrixSDK.MXPushRule?
+  @objc deinit
+  @objc override dynamic public init()
+}
+public typealias MXOnRoomEvent = (MatrixSDK.MXEvent, MatrixSDK.MXTimelineDirection, MatrixSDK.MXRoomState) -> Swift.Void
+extension MXEventTimeline {
+  @nonobjc public func canPaginate(_ direction: MatrixSDK.MXTimelineDirection) -> Swift.Bool
+  @discardableResult
+  @nonobjc public func resetPaginationAroundInitialEvent(withLimit limit: Swift.UInt, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation
+  @discardableResult
+  @nonobjc public func paginate(_ numItems: Swift.UInt, direction: MatrixSDK.MXTimelineDirection, onlyFromStore: Swift.Bool, completion: @escaping (MatrixSDK.MXResponse<Swift.Void>) -> Swift.Void) -> MatrixSDK.MXHTTPOperation?
+  @nonobjc public func listenToEvents(_ types: [MatrixSDK.MXEventType]? = nil, _ block: @escaping MatrixSDK.MXOnRoomEvent) -> Any
+}
+public enum MXLoginFlowType : Swift.Equatable, Swift.Hashable {
+  case password
+  case recaptcha
+  case OAuth2
+  case emailIdentity
+  case token
+  case dummy
+  case emailCode
+  case other(Swift.String)
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXLoginFlowType, b: MatrixSDK.MXLoginFlowType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXPusherKind : Swift.Equatable, Swift.Hashable {
+  case http, none, custom(Swift.String)
+  public var objectValue: ObjectiveC.NSObject {
+    get
+  }
+  public static func == (a: MatrixSDK.MXPusherKind, b: MatrixSDK.MXPusherKind) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXPushRuleKind : Swift.Equatable, Swift.Hashable {
+  case override, content, room, sender, underride
+  public var identifier: MatrixSDK.__MXPushRuleKind {
+    get
+  }
+  public init?(identifier: MatrixSDK.__MXPushRuleKind?)
+  public static func == (a: MatrixSDK.MXPushRuleKind, b: MatrixSDK.MXPushRuleKind) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXPushRuleConditionType : Swift.Equatable, Swift.Hashable {
+  case eventMatch
+  case profileTag
+  case containsDisplayName
+  case roomMemberCount
+  case senderNotificationPermission
+  case custom(Swift.String)
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXPushRuleConditionType, b: MatrixSDK.MXPushRuleConditionType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXPushRuleScope : Swift.Equatable, Swift.Hashable {
+  case global, device(profileTag: Swift.String)
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXPushRuleScope, b: MatrixSDK.MXPushRuleScope) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXCallHangupReason : Swift.Equatable, Swift.Hashable {
+  case userHangup
+  case iceFailed
+  case inviteTimeout
+  case iceTimeout
+  case userMediaFailed
+  case unknownError
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXCallHangupReason, b: MatrixSDK.MXCallHangupReason) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum MXCallRejectReplacementReason : Swift.Equatable, Swift.Hashable {
+  case declined
+  case failedRoomInvite
+  case failedCallInvite
+  case failedCall
+  public var identifier: Swift.String {
+    get
+  }
+  public init(identifier: Swift.String)
+  public static func == (a: MatrixSDK.MXCallRejectReplacementReason, b: MatrixSDK.MXCallRejectReplacementReason) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+extension MatrixSDK.MXBackgroundSyncServiceError : Swift.Equatable {}
+extension MatrixSDK.MXBackgroundSyncServiceError : Swift.Hashable {}
